@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+require('dotenv').config()
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,26 +22,52 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const fire = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+//Express config
 const app = express()
 const port = 3000
+
+//Dirname and body-parser
 const __dirname = path.resolve();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Routes
 app.get('/', (req, res) => {
     res.sendFile('kronos/public/home.html', {root: path.dirname(__dirname)});
   })
 
+  app.get('/register', (req, res) => {
+    res.sendFile('kronos/public/register.html', {root: path.dirname(__dirname)});
+  })
+
 app.post('/register', (req, res) => {
-    console.log(req.body)
-/*     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((response) => {
-        console.log(response.user)
+  const email = req.body.email;
+  const password = req.body.password;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      res.redirect('/home')
+      // ...
     })
     .catch((error) => {
-        console.log('Deu erro')
-    }); */
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+})
+
+
+app.get('/menu', (req, res) => {
+  auth.onAuthStateChanged(function(user){
+    if(user){
+      res.sendFile('kronos/public/menu.html', {root: path.dirname(__dirname)});
+    }else{
+      res.redirect("/")
+    }
+  })
 })
 
 
