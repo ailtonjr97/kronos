@@ -6,12 +6,13 @@ import bodyParser from "body-parser";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-require('dotenv').config()
+import dotenv from "dotenv"
+dotenv.config();
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBITVLEiAUN1Uis3fvUPAwu2gGBpV0Esz8",
+  apiKey: process.env.APIKEY,
   authDomain: "system-management-kronos.firebaseapp.com",
   projectId: "system-management-kronos",
   storageBucket: "system-management-kronos.appspot.com",
@@ -47,10 +48,8 @@ app.post('/register', (req, res) => {
   const password = req.body.password;
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
       const user = userCredential.user;
       res.redirect('/home')
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
