@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv")
-const empresaFilial = require("./empresaFilial.js");
+const empresaFilial = require("./routes/empresaFilial.js");
 dotenv.config();
 const app = express();
 

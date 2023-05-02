@@ -10,7 +10,7 @@ router.use((req, res, next) => {
 })
 
 
-router.use("/empresas", async (req, res, next) => {
+router.use("/empresas", async (req, res,) => {
     try {
       await axios
         .get(process.env.APITOTVS + "api/framework/environment/v1/companies", {
@@ -29,7 +29,7 @@ router.use("/empresas", async (req, res, next) => {
     }
   });
   //-------------------------------------------------------------------------------
-  router.use("/filiais", async (req, res, next) => {
+  router.use("/filiais", async (req, res) => {
     try {
       await axios
         .get(process.env.APITOTVS + "api/framework/environment/v1/branches", {
