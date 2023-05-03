@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv")
 const empresaFilial = require("./routes/empresaFilial.js");
+const produtos = require("./routes/produtos.js");
 dotenv.config();
 const app = express();
 
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/protheus", empresaFilial);
+app.use("/protheus", produtos);
 
 //-------------------------------------------------------------------------------
 app.listen(process.env.PORT, function () {
