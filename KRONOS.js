@@ -1,7 +1,8 @@
 //jshint esversion:6
-const express = require("express");
-const bodyParser = require("body-parser");
-const dotenv = require("dotenv")
+const express = require("/var/www/html/kronos/node_modules/express");
+const bodyParser = require("/var/www/html/kronos/node_modules/body-parser");
+const dotenv = require("/var/www/html/kronos/node_modules/dotenv");
+const mongoose = require("/var/www/html/kronos/node_modules/mongoose");
 const empresaFilial = require("./routes/empresaFilial.js");
 const produtos = require("./routes/produtos.js");
 dotenv.config();
@@ -19,8 +20,10 @@ app.use((req, res, next) => {
   next();
 });
 
+mongoose.connect(process.env.MONGOSTRING);
+
 app.use("/protheus", empresaFilial);
-app.use("/protheus", produtos);
+app.use("/produtos", produtos);
 
 //-------------------------------------------------------------------------------
 app.listen(process.env.PORT, function () {

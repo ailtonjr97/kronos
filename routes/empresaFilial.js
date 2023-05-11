@@ -4,18 +4,13 @@ const dotenv = require("dotenv")
 const axios = require("axios")
 dotenv.config();
 
-router.use((req, res, next) => {
-  console.log('Time: ', Date.now())
-  next()
-})
-
 
 router.use("/empresas", async (req, res,) => {
     try {
       await axios
         .get(process.env.APITOTVS + "api/framework/environment/v1/companies", {
           auth: {
-            username: process.env.USER,
+            username: "admin",
             password: process.env.SENHAPITOTVS,
           },
         })
@@ -24,7 +19,7 @@ router.use("/empresas", async (req, res,) => {
         });
     } catch (err) {
       return res.send(
-        "Erro ao retornar lista das empresas Protheus. Tente novamente mais tarde."
+        err
       );
     }
   });
@@ -34,7 +29,7 @@ router.use("/empresas", async (req, res,) => {
       await axios
         .get(process.env.APITOTVS + "api/framework/environment/v1/branches", {
           auth: {
-            username: process.env.USER,
+            username: "admin",
             password: process.env.SENHAPITOTVS,
           },
         })
