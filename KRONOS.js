@@ -5,6 +5,7 @@ const dotenv = require("/var/www/html/kronos/node_modules/dotenv");
 const mongoose = require("/var/www/html/kronos/node_modules/mongoose");
 const empresaFilial = require("./routes/empresaFilial.js");
 const produtos = require("./routes/produtos.js");
+const usuarios = require("./routes/usuarios.js");
 dotenv.config();
 const app = express();
 
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGOSTRING);
 
 app.use("/protheus", empresaFilial);
 app.use("/produtos", produtos);
+app.use("/usuarios", usuarios);
 
 //-------------------------------------------------------------------------------
 app.listen(process.env.PORT, function () {
