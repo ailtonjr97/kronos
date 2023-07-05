@@ -1,12 +1,14 @@
-const mongoose = require("/var/www/html/kronos/node_modules/mongoose");
+const mongoose = require("mongoose");
 
-const produtosProtheus = new mongoose.Schema({
-  code: String,
-  barcode: String,
-  description: String,
-  address: Boolean,
-  batch: String,
-  batchs: Array,
+const produto = new mongoose.Schema({
+  cod: String,
+  tipo: String,
+  um: String,
+  grupo: String,
+  peso: Number,
+  urev: String,
+  desc: String,
+  pesbru: Number
 });
 
-module.exports = mongoose.model("ProdutoProtheus", produtosProtheus);
+module.exports = mongoose.model("Produto", produto);
