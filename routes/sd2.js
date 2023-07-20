@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {atualizar, consultar} = require("../controllers/sd2.js");
+const isAuth = require("../middleware/isAuth.js");
 
-router.get("/atualizar", atualizar);
-router.get("/consultar", consultar);
+router.get("/atualizar", isAuth.isAuth, atualizar);
+router.get("/consultar", isAuth.isAuth, consultar);
 
 
 module.exports = router;
