@@ -8,7 +8,7 @@ function isAuth(req, res, next) {
         if (login && password && login === auth.login && password === auth.password) {
           next();
         }else{
-          res.status(401).send("teste2");
+          res.status(401).send("Não autorizado");
         }
       } catch (error) {
           res.send("Error")
